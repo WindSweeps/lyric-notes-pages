@@ -1,5 +1,5 @@
 /* Offline snapshots stay on the user's device; progress lives in browser-local storage. */
-const CACHE='lyric-notes-v6';
+const CACHE='lyric-notes-v7';
 const HOME=new URL('./index.html',self.location).href;
 const FILES=['./index.html','./offline.html','./manifest.webmanifest','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png'].map(path=>new URL(path,self.location).href);
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(FILES);const home=await cache.match(HOME);if(!home||!(await home.text()).includes('window.LESSONS =')){await caches.delete(CACHE);throw Error('Reading content was not cached');}await self.skipWaiting();})()));
